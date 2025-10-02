@@ -1,0 +1,16 @@
+$lime-primary: #a0d911;
+$lime-light: #eaff8f;
+$lime-dark: #7cb305;
+$calendula-gold: #faad14;
+$calendula-light: #fffbe6;
+$calendula-dark: #d48806;
+
+$gradient-primary: linear-gradient(135deg, $lime-primary, $calendula-gold);
+$gradient-light: linear-gradient(135deg, $lime-light, $calendula-light);
+$gradient-dark: linear-gradient(135deg, $lime-dark, $calendula-dark);
+$gradient-lime: linear-gradient(135deg, $lime-primary, $lime-dark);
+$gradient-lime-hover: linear-gradient(135deg, $lime-light, $lime-primary);
+
+$text-dark: #2c2c2c;
+$text-light: #666;
+$text-white: #fff;

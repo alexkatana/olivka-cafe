@@ -1,0 +1,256 @@
+// global.scss - обновленный адаптив
+@use './variables'as *;
+@use './fonts' as *;
+@use './animations' as *;
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: $font-body;
+  line-height: 1.6;
+  color: $text-dark;
+  background: #fff;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-heading;
+  font-weight: 600;
+  color: $text-dark;
+}
+
+// Кастомные стили для Ant Design компонентов
+
+// Header с градиентом
+.ant-layout-header {
+  background: $gradient-primary !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+// Меню в Header
+.ant-menu {
+  &.ant-menu-horizontal {
+    background: transparent !important;
+    border: none !important;
+    
+    .ant-menu-item {
+      color: $text-white !important;
+      font-weight: 500;
+      
+      &:hover {
+        color: $lime-light !important;
+        background: rgba(255, 255, 255, 0.1) !important;
+      }
+      
+      &.ant-menu-item-selected {
+        color: $lime-light !important;
+        background: rgba(255, 255, 255, 0.1) !important;
+      }
+    }
+  }
+}
+
+// Основные кнопки с градиентом Lime
+.ant-btn {
+  transition: all 0.3s ease;
+  
+  &.ant-btn-primary {
+    background: $gradient-lime !important;
+    border: none !important;
+    font-weight: 500;
+    
+    &:hover, &:focus {
+      background: $gradient-lime-hover !important;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(160, 217, 17, 0.4);
+    }
+  }
+  
+  // Вторичные кнопки
+  &:not(.ant-btn-primary) {
+    border-color: $lime-primary !important;
+    color: $lime-primary !important;
+    
+    &:hover, &:focus {
+      border-color: $lime-light !important;
+      color: $lime-light !important;
+      background: rgba(160, 217, 17, 0.1) !important;
+    }
+  }
+}
+
+// Кнопки в Hero секции
+.hero-button {
+  &.ant-btn {
+    border-color: $text-white !important;
+    color: $text-white !important;
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.1) !important;
+      border-color: $lime-light !important;
+      color: $lime-light !important;
+    }
+  }
+}
+
+// Ховер эффекты для ссылок
+a {
+  transition: color 0.3s ease;
+  
+  &:hover {
+    color: $lime-light !important;
+  }
+}
+
+// Кастомный скроллбар
+.custom-scrollbar {
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #eaff8f;
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #a0d911;
+  }
+
+  // Для Firefox
+  scrollbar-width: thin;
+  scrollbar-color: #eaff8f rgba(255, 255, 255, 0.1);
+}
+
+// Стили для кнопок категорий (как кнопка "О нас" на главной)
+.category-button {
+  &.ant-btn {
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    color: white !important;
+    background: transparent !important;
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.1) !important;
+      border-color: #eaff8f !important;
+      color: #eaff8f !important;
+    }
+  }
+}
+
+.category-button-active {
+  &.ant-btn {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-color: #eaff8f !important;
+    color: #eaff8f !important;
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.2) !important;
+      border-color: #eaff8f !important;
+      color: #eaff8f !important;
+    }
+  }
+}
+
+// Стили для поискового поля
+.search-input {
+  .ant-input {
+    background: transparent !important;
+    color: white !important;
+    
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.6) !important;
+    }
+  }
+  
+  .ant-input-prefix {
+    color: rgba(255, 255, 255, 0.6) !important;
+  }
+  
+  &:hover, &.ant-input-focused {
+    border-color: #eaff8f !important;
+    box-shadow: 0 0 0 2px rgba(234, 255, 143, 0.2) !important;
+  }
+}
+
+// ПЕРЕРАБОТАННЫЙ АДАПТИВ
+// Мобильные устройства (до 576px)
+@media (max-width: 576px) {
+  .ant-layout-header {
+    padding: 0 12px !important;
+  }
+  
+  h1 {
+    font-size: 1.75rem !important;
+    line-height: 1.2 !important;
+  }
+  
+  h2 {
+    font-size: 1.5rem !important;
+  }
+  
+  .ant-menu-horizontal {
+    font-size: 12px !important;
+  }
+  
+  .ant-card {
+    margin: 4px !important;
+  }
+  
+  // Уменьшаем отступы для мобильных
+  .ant-space {
+    gap: 12px !important;
+  }
+  
+  // Адаптивные кнопки
+  .ant-btn {
+    font-size: 14px !important;
+    padding: 8px 16px !important;
+    height: auto !important;
+  }
+}
+
+// Планшеты (577px - 768px)
+@media (min-width: 577px) and (max-width: 768px) {
+  .ant-layout-header {
+    padding: 0 16px !important;
+  }
+  
+  h1 {
+    font-size: 2rem !important;
+  }
+  
+  h2 {
+    font-size: 1.75rem !important;
+  }
+  
+  .ant-menu-horizontal {
+    font-size: 14px !important;
+  }
+}
+
+// Большие мобильные (375px - 576px)
+@media (min-width: 375px) and (max-width: 576px) {
+  h1 {
+    font-size: 1.5rem !important;
+  }
+}
+
+// Очень маленькие мобильные (до 374px)
+@media (max-width: 374px) {
+  h1 {
+    font-size: 1.25rem !important;
+  }
+  
+  .ant-btn {
+    font-size: 12px !important;
+    padding: 6px 12px !important;
+  }
+}

@@ -1,0 +1,1 @@
+export { Layout, Header, Content, Footer} from './layout.tsx';
