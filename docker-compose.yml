@@ -5,4 +5,5 @@ services:
     container_name: olivka-ssg
     ports:
       - "80:80"
+      - "443:443"
     restart: unless-stopped
