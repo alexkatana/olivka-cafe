@@ -17,7 +17,8 @@ FROM nginx:1.25-alpine AS runner
 
 # Nginx configuration for SPA/SSG routing and asset caching
 COPY nginx.conf /etc/nginx/conf.d/default.conf
-
+COPY nginx-ssl.conf /etc/nginx/conf.d/default.conf
+COPY ssl/ /etc/nginx/ssl/
 # Static build output from Vite
 COPY --from=builder /app/frontend/dist /usr/share/nginx/html
 
