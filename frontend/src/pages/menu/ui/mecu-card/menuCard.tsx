@@ -1,7 +1,8 @@
-// menuCard.tsx - с фиксированной высотой
-import { Card, Tag, Typography } from 'antd'
+import { Card, Tag, Typography, Button } from 'antd'
 import { formatPrice, formatWeight } from '@/shared/lib'
 import { useState } from 'react'
+import { ShoppingCartOutlined, CheckOutlined } from '@ant-design/icons'
+import { useCart } from '@/features/cart/lib/use-cart'
 
 const { Title, Paragraph, Text } = Typography
 
@@ -22,11 +23,22 @@ interface MenuCardProps {
 export const MenuCard = ({ item }: MenuCardProps) => {
   const [imageError, setImageError] = useState(false)
   const [imageLoaded, setImageLoaded] = useState(false)
+  const { addToCart, cart } = useCart()
+
+  const itemInCart = cart.items.find(cartItem => cartItem.id === item.id)
+  
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.stopPropagation()
+    addToCart(item)
+  }
+
+  const buttonText = itemInCart ? `В корзине (${itemInCart.quantity})` : 'В корзину'
+  const buttonIcon = itemInCart ? <CheckOutlined /> : <ShoppingCartOutlined />
 
   return (
     <Card
       style={{
-        height: '420px', // Фиксированная высота для всех карточек
+        height: '420px', 
         display: 'flex',
         flexDirection: 'column',
         borderRadius: '12px',
@@ -41,12 +53,12 @@ export const MenuCard = ({ item }: MenuCardProps) => {
         flex: 1,
         display: 'flex',
         flexDirection: 'column',
-        gap: '8px',
-        height: 'calc(100% - 160px)' // Вычисляем высоту контента
+        gap: '4px', 
+        height: 'calc(100% - 200px)' 
       }}
       cover={
         <div style={{ 
-          height: '230px', // Фиксированная высота изображения
+          height: '200px', 
           background: imageError ? '#2c2c2c' : '#f5f5f5',
           display: 'flex',
           alignItems: 'center',
@@ -54,7 +66,6 @@ export const MenuCard = ({ item }: MenuCardProps) => {
           borderBottom: '1px solid rgba(0,0,0,0.1)',
           overflow: 'hidden',
           position: 'relative',
-          flexShrink: 0 // Запрещаем сжатие
         }}>
           {imageError ? (
             <Text style={{ color: 'rgba(255,255,255,0.7)', fontSize: '12px' }}>Фото: {item.name}</Text>
@@ -81,23 +92,14 @@ export const MenuCard = ({ item }: MenuCardProps) => {
           )}
         </div>
       }
-      actions={[
-        <Text strong key="price" style={{ fontSize: '14px', color: '#2c2c2c' }}>
-          {formatPrice(item.price)}
-        </Text>,
-        <Text key="weight" style={{ fontSize: '12px', color: '#666' }}>
-          {formatWeight(item.weight)}
-        </Text>
-      ]}
       hoverable
     >
       <div style={{ 
         display: 'flex', 
         flexDirection: 'column', 
         height: '100%',
-        gap: '8px'
+        gap: '4px' 
       }}>
-        {/* Заголовок и теги */}
         <div style={{ 
           display: 'flex', 
           justifyContent: 'space-between', 
@@ -131,7 +133,6 @@ export const MenuCard = ({ item }: MenuCardProps) => {
           </div>
         </div>
         
-        {/* Описание */}
         <Paragraph 
           style={{ 
             margin: 0,
@@ -143,13 +144,12 @@ export const MenuCard = ({ item }: MenuCardProps) => {
             overflow: 'hidden',
             color: '#666',
             flex: 1,
-            minHeight: '36px' // Минимальная высота для 3 строк
+            minHeight: '36px'
           }}
         >
           {item.description}
         </Paragraph>
         
-        {/* Ингредиенты */}
         {item.ingredients.length > 0 && (
           <Text 
             style={{ 
@@ -161,12 +161,48 @@ export const MenuCard = ({ item }: MenuCardProps) => {
               overflow: 'hidden',
               color: '#888',
               flexShrink: 0,
-              minHeight: '20px' // Минимальная высота для 2 строк
+              minHeight: '20px',
+              marginTop: '2px'
             }}
           >
             Состав: {item.ingredients.join(', ')}
           </Text>
         )}
+
+        <div style={{ 
+          display: 'flex', 
+          justifyContent: 'space-between', 
+          alignItems: 'flex-end',
+          marginTop: 'auto',
+          paddingTop: '6px', 
+          flexShrink: 0
+        }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1px' }}> 
+            <Text strong style={{ fontSize: '14px', color: '#2c2c2c' }}>
+              {formatPrice(item.price)}
+            </Text>
+            <Text style={{ fontSize: '11px', color: '#666' }}>
+              {formatWeight(item.weight)}
+            </Text>
+          </div>
+          
+          <Button
+            type={itemInCart ? "primary" : "default"}
+            icon={buttonIcon}
+            size="small"
+            onClick={handleAddToCart}
+            style={{
+              background: itemInCart ? '#52c41a' : undefined,
+              borderColor: itemInCart ? '#52c41a' : undefined,
+              fontWeight: '500',
+              fontSize: '11px',
+              height: '28px',
+              padding: '0 8px'
+            }}
+          >
+            {buttonText}
+          </Button>
+        </div>
       </div>
     </Card>
   )

@@ -10,8 +10,9 @@ export const ROUTES = {
   MAIN: '/main',
   MENU: '/menu',
   DELIVERY: '/delivery',
-  ABOUT: '/about',
-  ADMIN: '/admin'
+  ABOUT: '/main',
+  ADMIN: '/admin',
+  CART: '/cart',
 } as const
 
 export const BREAKPOINTS = {

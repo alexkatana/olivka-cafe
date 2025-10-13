@@ -1,16 +1,17 @@
 import { useState } from 'react'
-import { Layout, Menu, Button, Space, Typography, Drawer } from 'antd'
-import { MenuOutlined } from '@ant-design/icons'
+import { Layout, Menu, Button, Space, Drawer, Badge } from 'antd'
+import { MenuOutlined, ShoppingCartOutlined } from '@ant-design/icons'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { ROUTES } from '@/shared/lib'
+import { useCart } from '@/features/cart/lib/use-cart'
 
 const { Header: AntHeader } = Layout
-const { Title } = Typography
 
 export const Header = () => {
   const navigate = useNavigate()
   const location = useLocation()
   const [drawerVisible, setDrawerVisible] = useState(false)
+  const { cart } = useCart()
 
   const menuItems = [
     { key: ROUTES.HOME, label: 'Главная' },
@@ -55,46 +56,53 @@ export const Header = () => {
       top: 0,
       zIndex: 100
     }}>
-      <Space style={{ width: '100%', justifyContent: 'space-between', height: '100%' }}>
-        {/* Логотип */}
-        <Space>
-          <Title 
-            level={3} 
-            style={{ 
-              margin: 0, 
-              cursor: 'pointer',
-              color: 'white',
-              fontFamily: "'Playfair Display', serif"
-            }}
-            onClick={() => navigate(ROUTES.HOME)}
-          >
-          </Title>
-        </Space>
+      <Space style={{ width: '100%', justifyContent: 'space-between', height: '100%', alignItems: 'center' }}>
+        
+        <div style={{ width: '40px' }}></div>
 
-        {/* Десктопное меню */}
-        <div style={{ flex: 1, display: 'flex', justifyContent: 'center' }}>
+        <Space size="large" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flex: 1 }}>
           <div style={{ display: 'block' }}>
             {desktopMenu}
           </div>
-        </div>
-
-        {/* Мобильное меню */}
+          <Badge 
+            count={cart.itemCount} 
+            size="small" 
+            offset={[-5, 5]}
+            style={{ 
+              background: '#52c41a',
+              boxShadow: '0 0 0 1px #fff'
+            }}
+          >
+            <Button 
+              type="text" 
+              icon={<ShoppingCartOutlined />} 
+              onClick={() => navigate('/cart')}
+              style={{ 
+                color: 'white',
+                fontSize: '18px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
+            />
+          </Badge>
+        </Space>
         <div style={{ display: 'none' }}>
           <Button 
             icon={<MenuOutlined />} 
             onClick={() => setDrawerVisible(true)}
             style={{ color: 'white', borderColor: 'white' }}
           />
-          
-          <Drawer
-            title="Меню"
-            placement="right"
-            onClose={() => setDrawerVisible(false)}
-            open={drawerVisible}
-          >
-            {mobileMenu}
-          </Drawer>
         </div>
+        
+        <Drawer
+          title="Меню"
+          placement="right"
+          onClose={() => setDrawerVisible(false)}
+          open={drawerVisible}
+        >
+          {mobileMenu}
+        </Drawer>
       </Space>
     </AntHeader>
   )
