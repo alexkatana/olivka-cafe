@@ -4,7 +4,7 @@ import { MainPage } from '@/pages/main/mainPage'
 import { MenuPage } from '@/pages/menu/menuPage'
 import { DeliveryPage } from '@/pages/delivery/deliveryPage'
 import { AboutPage } from '@/pages/about/aboutPage'
-import {CartPage} from '@/pages/cart/CartPage'
+import {CartPage} from '@/pages/cart/cartPage'
 
 export const AppRouter = () => {
   return (
