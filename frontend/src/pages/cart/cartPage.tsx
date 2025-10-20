@@ -10,6 +10,7 @@ export const CartPage = () => {
 
   if (cart.items.length === 0) {
     return (
+      // ебаная хуета
       <div style={{ 
         minHeight: '100vh',
         background: `linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('/images/hero/cart.webp')`,
@@ -42,14 +43,14 @@ export const CartPage = () => {
                 height: '48px'
               }}
             >
-              Перейти в меню
+              Перейти в меню 
             </Button>
           </Space>
-        </div>
+        </div> 
       </div>
     )
   }
-
+// фотку добавить
   return (
     <div style={{ 
       minHeight: '100vh',
