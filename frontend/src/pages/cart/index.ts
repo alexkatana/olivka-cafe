@@ -1,1 +1,1 @@
-export {CartPage} from './cartPage.tsx'
+export {CartPage} from './CartPage.tsx'

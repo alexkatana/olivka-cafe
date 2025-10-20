@@ -175,13 +175,28 @@ export const MenuCard = ({ item }: MenuCardProps) => {
           alignItems: 'flex-end',
           marginTop: 'auto',
           paddingTop: '6px', 
-          flexShrink: 0
+          flexShrink: 0,
+          gap: '8px' 
         }}>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1px' }}> 
-            <Text strong style={{ fontSize: '14px', color: '#2c2c2c' }}>
+          <div style={{ 
+            display: 'flex', 
+            flexDirection: 'column', 
+            gap: '1px',
+            flexShrink: 0, 
+            minWidth: 0 
+          }}> 
+            <Text strong style={{ 
+              fontSize: '14px', 
+              color: '#2c2c2c',
+              whiteSpace: 'nowrap' 
+            }}>
               {formatPrice(item.price)}
             </Text>
-            <Text style={{ fontSize: '11px', color: '#666' }}>
+            <Text style={{ 
+              fontSize: '11px', 
+              color: '#666',
+              whiteSpace: 'nowrap' 
+            }}>
               {formatWeight(item.weight)}
             </Text>
           </div>
@@ -197,7 +212,8 @@ export const MenuCard = ({ item }: MenuCardProps) => {
               fontWeight: '500',
               fontSize: '11px',
               height: '28px',
-              padding: '0 8px'
+              padding: '0 8px',
+              flexShrink: 0
             }}
           >
             {buttonText}
