@@ -114,7 +114,8 @@ export const MenuCard = ({ item }: MenuCardProps) => {
               fontSize: '14px',
               lineHeight: '1.3',
               color: '#2c2c2c',
-              flex: 1
+              flex: 1,
+              minWidth: 0 // Добавляем для правильного обрезания текста
             }}
           >
             {item.name}
@@ -176,26 +177,32 @@ export const MenuCard = ({ item }: MenuCardProps) => {
           marginTop: 'auto',
           paddingTop: '6px', 
           flexShrink: 0,
-          gap: '8px' 
+          gap: '8px',
+          minWidth: 0 // Важно для мобильных устройств
         }}>
           <div style={{ 
             display: 'flex', 
             flexDirection: 'column', 
             gap: '1px',
-            flexShrink: 0, 
-            minWidth: 0 
+            flexShrink: 1, // Разрешаем сжатие при необходимости
+            minWidth: 0, // Позволяет корректно работать с текстом
+            overflow: 'hidden' // Скрываем выходящий контент
           }}> 
             <Text strong style={{ 
               fontSize: '14px', 
               color: '#2c2c2c',
-              whiteSpace: 'nowrap' 
+              whiteSpace: 'nowrap',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis'
             }}>
               {formatPrice(item.price)}
             </Text>
             <Text style={{ 
               fontSize: '11px', 
               color: '#666',
-              whiteSpace: 'nowrap' 
+              whiteSpace: 'nowrap',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis'
             }}>
               {formatWeight(item.weight)}
             </Text>
@@ -213,7 +220,8 @@ export const MenuCard = ({ item }: MenuCardProps) => {
               fontSize: '11px',
               height: '28px',
               padding: '0 8px',
-              flexShrink: 0
+              flexShrink: 0, // Кнопка не сжимается
+              minWidth: 'auto' // Убираем минимальную ширину
             }}
           >
             {buttonText}

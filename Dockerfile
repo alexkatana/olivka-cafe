@@ -5,13 +5,11 @@ WORKDIR /app
 
 # Install dependencies only for the frontend app
 COPY frontend/package.json frontend/package-lock.json ./frontend/
-RUN cd ./frontend \
-  && npm ci --no-audit --no-fund
+RUN cd ./frontend && npm ci --no-audit --no-fund
 
 # Copy the rest of the frontend sources and build
 COPY frontend ./frontend
-RUN cd ./frontend \
-  && npm run build
+RUN cd ./frontend && npm run build
 
 FROM nginx:1.25-alpine AS runner
 
