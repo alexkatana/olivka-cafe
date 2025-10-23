@@ -32,7 +32,6 @@ export const MenuCard = ({ item }: MenuCardProps) => {
     addToCart(item)
   }
 
-  const buttonText = itemInCart ? `В корзине (${itemInCart.quantity})` : 'В корзину'
   const buttonIcon = itemInCart ? <CheckOutlined /> : <ShoppingCartOutlined />
 
   return (
@@ -115,7 +114,7 @@ export const MenuCard = ({ item }: MenuCardProps) => {
               lineHeight: '1.3',
               color: '#2c2c2c',
               flex: 1,
-              minWidth: 0 // Добавляем для правильного обрезания текста
+              minWidth: 0
             }}
           >
             {item.name}
@@ -178,31 +177,26 @@ export const MenuCard = ({ item }: MenuCardProps) => {
           paddingTop: '6px', 
           flexShrink: 0,
           gap: '8px',
-          minWidth: 0 // Важно для мобильных устройств
+          minWidth: 0
         }}>
           <div style={{ 
             display: 'flex', 
             flexDirection: 'column', 
             gap: '1px',
-            flexShrink: 1, // Разрешаем сжатие при необходимости
-            minWidth: 0, // Позволяет корректно работать с текстом
-            overflow: 'hidden' // Скрываем выходящий контент
+            flexShrink: 0, // Не сжимаем блок с ценой
+            minWidth: 0
           }}> 
             <Text strong style={{ 
               fontSize: '14px', 
               color: '#2c2c2c',
-              whiteSpace: 'nowrap',
-              overflow: 'hidden',
-              textOverflow: 'ellipsis'
+              whiteSpace: 'nowrap' // Запрещаем перенос, но без обрезки
             }}>
               {formatPrice(item.price)}
             </Text>
             <Text style={{ 
               fontSize: '11px', 
               color: '#666',
-              whiteSpace: 'nowrap',
-              overflow: 'hidden',
-              textOverflow: 'ellipsis'
+              whiteSpace: 'nowrap' // Запрещаем перенос, но без обрезки
             }}>
               {formatWeight(item.weight)}
             </Text>
@@ -219,13 +213,15 @@ export const MenuCard = ({ item }: MenuCardProps) => {
               fontWeight: '500',
               fontSize: '11px',
               height: '28px',
-              padding: '0 8px',
-              flexShrink: 0, // Кнопка не сжимается
-              minWidth: 'auto' // Убираем минимальную ширину
+              width: '40px', // Фиксированная ширина для иконки
+              padding: '0',
+              flexShrink: 0,
+              minWidth: '40px', // Минимальная ширина для кнопки
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
             }}
-          >
-            {buttonText}
-          </Button>
+          />
         </div>
       </div>
     </Card>
