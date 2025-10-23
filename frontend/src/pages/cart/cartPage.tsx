@@ -208,7 +208,7 @@ export const CartPage = () => {
                   
                   <Divider />
                   
-                  <Space style={{ width: '100%', justifyContent: 'space-between' }}>
+                  <div style={{ display: 'flex', justifyContent: 'center' }}>
                     <Button 
                       danger 
                       onClick={clearCart}
@@ -221,19 +221,7 @@ export const CartPage = () => {
                     >
                       Очистить корзину
                     </Button>
-                    <Button 
-                      type="primary" 
-                      size="large"
-                      style={{
-                        padding: '12px 32px',
-                        height: '48px',
-                        background: '#a0d911',
-                        border: 'none'
-                      }}
-                    >
-                      Оформить заказ
-                    </Button>
-                  </Space>
+                  </div>
                 </Space>
               </Card>
             </Space>
